@@ -14,14 +14,13 @@ struct ContentView: View {
         ScrollView {
             VStack(alignment: .leading) {
                 Image(.image).resizable().scaledToFit()
-//                    .frame(height: 400  + (offset < 0 ? abs(offset/2) : 0))
+                    .frame(height: 400  + (offset < 0 ? abs(offset/2) : 0))
 //                    .frame(height: 400  + (offset < 0 ? abs(offset/2) : 0))
                     .blur(radius: offset < 0 ? abs(offset/2) : 0)
                     .clipped()
-                
                 DetailView()
             }
-            .offset(y: offset > 0 ? offset : 0)
+            .offset(y: offset > 0 ? 0 : offset)
         }
         .onScrollGeometryChange(for: CGFloat.self, of: { geometry in
             geometry.contentOffset.y
