@@ -10,10 +10,11 @@ import SwiftUI
 struct ButtonKey: View {
     
     let name: String
+    let onPress: (String) -> Void
     var body: some View {
-        Button() {
-            print("Pressed")
-        } label: {
+        Button(action: {
+            onPress(name)
+        }){
             Text(name)
                 .font(.title)
                 .foregroundColor(.teal)
@@ -22,11 +23,13 @@ struct ButtonKey: View {
         .padding()
         .frame(width: 80, height: 80)
         .background(Color(hex: "#F7F7F7"))
-        .cornerRadius(10)
+        .cornerRadius(30)
     }
 }
 
 
 #Preview {
-    ButtonKey(name: "AC")
+    ButtonKey(name: "AC", onPress: { name in
+        print("\(name) pressed")
+    })
 }

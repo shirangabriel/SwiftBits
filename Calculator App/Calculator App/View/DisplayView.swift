@@ -8,20 +8,21 @@
 import SwiftUI
 
 struct DisplayView: View {
+    let largeText: String
+    let smallText: String
     var body: some View {
         HStack{
             Spacer()
             VStack {
                 HStack{
-                    Text("308")
-                    Text("x")
-                    Text("42")
+                    Text(smallText)
                 }.font(.title2)
                     .fontWeight(.semibold)
                 
-                Text("12936")
+                Text(largeText)
                     .font(.largeTitle)
                     .fontWeight(.black)
+                    
             }
         }.padding(.horizontal, 24)
     }
@@ -30,5 +31,5 @@ struct DisplayView: View {
 
 
 #Preview {
-    DisplayView()
+    DisplayView(largeText: "12936", smallText: "308 + 45 - 345")
 }
