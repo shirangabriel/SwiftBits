@@ -36,12 +36,8 @@ struct ContentView: View {
             }
             
         } else if(name == "=") {
-            
-            self.calculate()
-            
             self.$smallText.wrappedValue = self.$displayText.wrappedValue
-            
-            self.$displayText.wrappedValue = "1928"
+            self.calculate()
         }else {
             self.$displayText.wrappedValue += name
         }
@@ -49,25 +45,18 @@ struct ContentView: View {
     
     
     func calculate(){
-        let chars = Array(displayText)
-        
-        for (index, char) in chars.enumerated(){
-            let temp = ""
-
+        var equation: String = self.$displayText.wrappedValue;
+        equation = equation.replacingOccurrences(of: "x", with: "*")
+        if  let expression = NSExpression(format: equation) as NSExpression? {
+            if let result = expression.expressionValue(with: nil, context: nil) as? NSNumber {
+                self.$displayText.wrappedValue = result.stringValue
+            }else {
+                print("Could not evaluate the formula.")
+            }
+        }else {
+            print("Invalid Formula")
         }
-        
-        
-        print(chars)
-
     }
-    
-    
-    func isNumber(_ string: String) -> Bool {
-        return Double(string) != nil
-    }
-    
-    
-    
 }
 
 #Preview {
