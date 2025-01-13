@@ -14,7 +14,7 @@ struct KeyboardLayoutView: View {
         ["7", "8", "9", "x"],
         ["4", "5", "6", "-"],
         ["1", "2", "3", "+"],
-        ["backsapce", "0", ".", "="]
+        ["backspace", "0", ".", "="]
     ]
     
     

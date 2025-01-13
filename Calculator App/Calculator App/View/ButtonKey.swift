@@ -26,7 +26,7 @@ struct ButtonKey: View {
     
     
     func renderTextOrIcon(key: String)-> some View {
-        if(key == "backsapce" || key == "/" || key == "x" || key == "-" || key == "+" ){
+        if(key == "backspace" || key == "/" || key == "x" || key == "-" || key == "+" ){
             return AnyView(
                 Image(systemName: getIconName(key: key))
                     .foregroundStyle(getTextColor(key: key))
@@ -57,7 +57,7 @@ struct ButtonKey: View {
     
     func getIconName(key: String) -> String {
         switch key {
-        case "backsapce":
+        case "backspace":
             return "delete.left"
         case "/":
             return "divide"

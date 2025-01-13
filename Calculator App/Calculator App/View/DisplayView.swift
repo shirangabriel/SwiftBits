@@ -14,22 +14,24 @@ struct DisplayView: View {
         HStack{
             Spacer()
             VStack {
-                HStack{
-                    Text(smallText)
-                }.font(.title2)
-                    .fontWeight(.semibold)
-                
+                EquationView(text: smallText)
                 Text(largeText)
                     .font(.largeTitle)
                     .fontWeight(.black)
+                    .frame(maxWidth: .infinity, alignment: .trailing)
                     
             }
         }.padding(.horizontal, 24)
     }
+    
+    
+    
+    
+    
 }
 
 
 
 #Preview {
-    DisplayView(largeText: "12936", smallText: "308 + 45 - 345")
+    DisplayView(largeText: "12936", smallText: "308+22+2")
 }

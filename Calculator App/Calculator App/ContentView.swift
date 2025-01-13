@@ -22,10 +22,20 @@ struct ContentView: View {
     
     
     func handleKeyboardInput(name: String){
+        
+        print(displayText.count)
+        
+        if displayText.count > 0,
+            let lastChar = self.$displayText.wrappedValue.last, String(lastChar) == name,
+           !lastChar.isNumber{
+            return
+        }
+        
+        
         if(name == "AC") {
             self.$displayText.wrappedValue = ""
             self.$smallText.wrappedValue = ""
-        } else if(name == "undo"){
+        } else if(name == "backspace"){
             if($displayText.wrappedValue.count > 0){
                 self.$displayText.wrappedValue.removeLast()
             }
@@ -35,10 +45,29 @@ struct ContentView: View {
                 self.$smallText.wrappedValue = ""
             }
             
-        } else if(name == "=") {
+        } else if(name == "+/-"){
+            if $displayText.wrappedValue.count > 0,
+               let firstChar = $displayText.wrappedValue.first, !firstChar.isNumber {
+                
+                if(firstChar == "-"){
+                    $displayText.wrappedValue.remove(at: self.displayText.startIndex)
+                }
+                
+            }else {
+                self.$displayText.wrappedValue.insert("-", at: self.displayText.startIndex)
+            }
+            
+        }else if(name == "=") {
+            // check if % and +/-
+            
             self.$smallText.wrappedValue = self.$displayText.wrappedValue
             self.calculate()
         }else {
+            
+            if displayText.count > 0, let lastChar = displayText.last, !lastChar.isNumber,    !name.allSatisfy(\.isNumber) {
+                displayText.removeLast()
+            }
+            
             self.$displayText.wrappedValue += name
         }
     }
