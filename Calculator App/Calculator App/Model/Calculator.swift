@@ -6,26 +6,53 @@
 //
 
 import Foundation
+import SwiftUI
 
 struct Calculator {
-    var displayVlaue: String = ""
-    
-    enum Operation: String {
-        case add
-        case subtract
-        case multiply
-        case divide
+    func getIconName(key: String) -> String {
+        switch key {
+        case "backspace":
+            return "delete.left"
+        case "/":
+            return "divide"
+        case "x":
+            return "multiply"
+        case "-":
+            return "minus"
+        case "+":
+            return "plus"
+        default:
+            return ""
+        }
     }
     
-    enum State {
-        case idle
-        case waitingForOperator
-        case waitingForOperand
-        case waitingForResult
+    
+    func getTextColor(key: String)-> Color {
+        let arithMaticRegexPatternHorizontalRow = "(AC|\\+/-|%)"
+        let arithMaticRegexPatternVerticalRow = "(/|x|-|\\+|=)"
+        if let _ = key.range(of: arithMaticRegexPatternHorizontalRow, options: .regularExpression){
+            return .teal
+        }else if let _ = key.range(of: arithMaticRegexPatternVerticalRow, options: .regularExpression){
+            return .orange
+        }
+        
+        return .black
     }
     
-    let operations: [Operation] = [.add, .subtract, .multiply, .divide]
-    
-    let state: State = .idle
+    func renderTextOrIcon(key: String)-> some View {
+        if(key == "backspace" || key == "/" || key == "x" || key == "-" || key == "+" ){
+            return AnyView(
+                Image(systemName: getIconName(key: key))
+                    .foregroundStyle(getTextColor(key: key))
+                    .fontWeight(.semibold)
+                    .font(.title)
+            )
+        }else {
+            return AnyView(Text(key)
+                .font(.title)
+                .foregroundColor(getTextColor(key: key))
+                .fontWeight(.semibold))
+        }
+    }
     
 }

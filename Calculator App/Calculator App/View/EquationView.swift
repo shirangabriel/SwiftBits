@@ -8,7 +8,12 @@
 import SwiftUI
 
 struct EquationView: View {
+    let calculator: Calculator = Calculator()
     let text: String
+    let isLargeText: Bool
+    @State private var isFullWidth = false
+    
+    
     var body: some View {
         mixTextAndImage()
     }
@@ -24,15 +29,38 @@ struct EquationView: View {
                 ForEach(formula, id: \.self) { value in
                     if let _ = Int(value) { // Check if value can be converted to an Int
                            Text(value)
+                            .font(isLargeText ? .system(size: 64): .largeTitle)
+                            .fontWeight(isLargeText ? .bold : .semibold)
+                            .lineLimit(3)
                        } else {
-                           Image(systemName: "plus")
+                           Image(systemName: calculator.getIconName(key: value))
+                               .font(isLargeText ? .largeTitle: .title3)
                                .foregroundStyle(.orange)
+                               .fontWeight(isLargeText ? .bold : .semibold)
                        }
-                }.font(.title)
-                    .fontWeight(.semibold)
+                }
             }
                 .frame(maxWidth: .infinity, alignment: .trailing)
+                .lineLimit(3)
         )
+    }
+    
+    struct MoveUpModifier: ViewModifier {
+        var isFullWidth: Bool
+
+        func body(content: Content) -> some View {
+            content
+                .overlay(
+                    Group {
+                        if isFullWidth {
+                            Text("Item 1")
+                                .background(Color.red)
+                                .padding()
+                                .offset(y: -20) // Move up when full width is reached
+                        }
+                    }
+                )
+        }
     }
     
     
@@ -63,7 +91,7 @@ struct EquationView: View {
 
 
 #Preview {
-    EquationView(text: "308+12x3")
+    EquationView(text: "308\n+12x3+2", isLargeText: true)
 }
 
 

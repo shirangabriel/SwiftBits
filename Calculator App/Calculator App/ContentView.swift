@@ -10,6 +10,9 @@ import SwiftUI
 struct ContentView: View {
     @State var displayText: String = ""
     @State var smallText: String = ""
+    
+    let calculater: Calculator = Calculator()
+    
     var body: some View {
         VStack {
             Spacer()
@@ -26,7 +29,7 @@ struct ContentView: View {
         print(displayText.count)
         
         if displayText.count > 0,
-            let lastChar = self.$displayText.wrappedValue.last, String(lastChar) == name,
+           let lastChar = self.$displayText.wrappedValue.last, String(lastChar) == name,
            !lastChar.isNumber{
             return
         }
@@ -57,6 +60,8 @@ struct ContentView: View {
                 self.$displayText.wrappedValue.insert("-", at: self.displayText.startIndex)
             }
             
+        }else if(name == "%") {
+            // TODO
         }else if(name == "=") {
             // check if % and +/-
             

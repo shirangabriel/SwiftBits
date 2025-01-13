@@ -1,4 +1,4 @@
-import UIKit
+import SwiftUI
 
 var keys: [[String]] = [
     ["AC", "+/-", "%", "/"],
@@ -9,8 +9,12 @@ var keys: [[String]] = [
 ]
 
 
-
-struct Key{
-  
+HStack {
+    ForEach(keys) { row in
+        HStack {
+            ForEach(row) { key in
+                Button(action: { print(key) }) { Text(key) }
+            }
+        }
+    }
 }
-
