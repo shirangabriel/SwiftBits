@@ -9,8 +9,7 @@ import SwiftUI
 
 struct HomeTile: View {
     var body:some View {
-        let size = UIScreen.main.bounds.width / 2
-        
+        let size = UIScreen.main.bounds.width / 2        
         VStack {
             Image(systemName: "plus")
                 .font(.title3)
