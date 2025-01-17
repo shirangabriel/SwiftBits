@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct Home: View {
+    @State private var isModalPresented = false
     let items = ["item1", "item2", "item3"]
     
     let columns: [GridItem] = [
@@ -43,13 +44,16 @@ struct Home: View {
                     HStack {
                         Spacer()
                         FloatingButton(onTap: {
-                            print("tapped")
+                            isModalPresented = true
                         })
                         
                     }
                 }
                 
             }
+            .sheet(isPresented: $isModalPresented, content: {
+                ModalView()
+            })
         }
     }
 }
