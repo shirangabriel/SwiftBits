@@ -11,6 +11,8 @@ struct Home: View {
     @State private var isModalPresented = false
     let items = ["item1", "item2", "item3"]
     
+   
+    
     let columns: [GridItem] = [
         GridItem(.flexible()),
         GridItem(.flexible())
@@ -20,6 +22,7 @@ struct Home: View {
         NavigationStack {
             ZStack {
                 ScrollView {
+                    Spacer().frame(height: 60)
                     Text("List")
                         .font(.largeTitle)
                         .fontWeight(.bold)
@@ -28,14 +31,16 @@ struct Home: View {
                     
                     
                     LazyVGrid(columns: columns, spacing: 16){
-                        ForEach(items, id: \.self) { item in
+                        ForEach(listItems, id: \.self) { item in
                             NavigationLink(destination: DetailView()) {
-                                HomeTile()
+                                HomeTile(listItem: item)
                             }
+                            .buttonStyle(PlainButtonStyle())
                             
                         }
                     }
                 }
+                .scrollIndicators(.hidden)
                 .padding()
                 
                 VStack {
@@ -50,6 +55,7 @@ struct Home: View {
                 }
                 
             }
+            .ignoresSafeArea()
             .sheet(isPresented: $isModalPresented, content: {
                 ModalView()
             })

@@ -32,5 +32,5 @@ struct TaskDetailCell: View {
 
 
 #Preview {
-    TaskDetailCell(imageName: "plus", text: "some text", onTap: {})
+    TaskDetailCell(imageName: "plus", text: "some text",  onTap: {})
 }
