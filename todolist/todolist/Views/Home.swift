@@ -37,7 +37,6 @@ struct Home: View {
                     }
                 }
                 .padding()
-                .background(Color(hex: "#F7F7F7"))
                 
                 VStack {
                     Spacer()
