@@ -32,7 +32,7 @@ struct Home: View {
                     
                     LazyVGrid(columns: columns, spacing: 16){
                         ForEach(listItems, id: \.self) { item in
-                            NavigationLink(destination: DetailView()) {
+                            NavigationLink(destination: DetailView(listItem: item)) {
                                 HomeTile(listItem: item)
                             }
                             .buttonStyle(PlainButtonStyle())
