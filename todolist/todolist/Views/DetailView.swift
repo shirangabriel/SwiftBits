@@ -11,23 +11,27 @@ struct DetailView: View {
     let listItem: ListItem
     var body: some View {
         VStack {
-            VStack {
-                Image(systemName: listItem.image)
-                    .font(.largeTitle)
-                    .frame(maxWidth: .infinity, alignment: .leading)
-                    .padding(.bottom, 16)
+            VStack(alignment: .leading) {
+                ZStack {
+                    Circle()
+                        .frame(width: 70)
+                    Image(systemName: listItem.image)
+                        .font(.largeTitle)
+                        .foregroundStyle(listItem.imageColor)
+                }
+                .padding(.bottom)
+                
                 
                 Text(listItem.title)
                     .font(.largeTitle)
-                    .frame(maxWidth: .infinity, alignment: .leading)
                 
                 Text(String(listItem.count))
                     .font(.subheadline)
                     .padding(.bottom, 24)
                     .frame(maxWidth: .infinity, alignment: .leading)
             }
-            .padding(.leading, 36)
             .foregroundStyle(.white)
+            .padding(.leading, 36)
             
             
             VStack {
