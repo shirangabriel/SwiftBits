@@ -34,15 +34,8 @@ struct DetailView: View {
             .padding(.leading, 36)
             
             
-            VStack {
-                Text("Tasks")
-                    .frame(maxWidth: .infinity)
-                Spacer()
-            }
-            .padding()
-            .background(Color("cardBackground"))
-            .cornerRadius(30)
-            .ignoresSafeArea(.all)
+            TaskList()
+                .ignoresSafeArea()
         }
         .background(.blue)
         
