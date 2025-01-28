@@ -8,19 +8,20 @@
 import SwiftUI
 
 struct TaskRow: View {
+    let task: Todo
     var body: some View {
         HStack {
             VStack(alignment: .leading) {
-                Text("Call Max")
+                Text(task.name ?? "Unknown")
                     .font(.subheadline)
                 
-                Text("20:15 - April 15th")
+                Text("\(task.date ?? Date())")
                     .font(.caption)
             }
             .frame(maxWidth: .infinity, alignment: .leading)
             
             
-            Toggle(isOn: .constant(true)) {
+            Toggle(isOn: .constant(task.isCompleted)) {
                 
             }
             .toggleStyle(iOSCheckboxToggleStyle())
@@ -34,6 +35,6 @@ struct TaskRow: View {
 }
 
 
-#Preview {
-    TaskRow()
-}
+//#Preview {
+//    TaskRow(task: Todo)
+//}

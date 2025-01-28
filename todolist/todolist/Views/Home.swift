@@ -11,8 +11,6 @@ struct Home: View {
     @State private var isModalPresented = false
     let items = ["item1", "item2", "item3"]
     
-   
-    
     let columns: [GridItem] = [
         GridItem(.flexible()),
         GridItem(.flexible())
@@ -57,7 +55,7 @@ struct Home: View {
             }
             .ignoresSafeArea()
             .sheet(isPresented: $isModalPresented, content: {
-                ModalView()
+                AddTaskModalView()
             })
         }
     }

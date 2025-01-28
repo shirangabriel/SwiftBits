@@ -1,5 +1,5 @@
 //
-//  ModalView.swift
+//  AddTaskModalView.swift
 //  todolist
 //
 //  Created by Gabe on 2025-01-17.
@@ -7,9 +7,12 @@
 
 import SwiftUI
 
-struct ModalView: View {
+struct AddTaskModalView: View {
+    @Environment(\.managedObjectContext) var moc
     @Environment(\.presentationMode) var presentationMode
     @State var task: String = ""
+    @State var note: String = ""
+    @State var selectedDate = Date()
     @FocusState private var textFieldFocus: Bool;
     
     var body: some View {
@@ -49,39 +52,18 @@ struct ModalView: View {
             }
             
             
-            VStack {
-                TaskDetailCell(imageName: "bell", text: "May 29, 14:00", onTap: {
-                    handleOnTaskInforCellTap(taskInfo: "reminder")
-                })
-                
-                
-                HStack {
-                    Image(systemName: "note")
-                    Text("Add note")
-                        .padding(.leading, 16)
-                    Spacer()
-                }
-                .font(.subheadline)
-                .fontWeight(.medium)
-                .padding(.bottom, 16)
-                .onTapGesture {
-                    print("Date")
-                }
-                
-                
-                
-                TaskDetailCell(imageName: "tag", text: "Category", onTap: {
-                    handleOnTaskInforCellTap(taskInfo: "category")
-                })
-            }
-            .frame(maxWidth: .infinity, alignment: .leading)
-            .padding(.leading, 16)
-            
-            
+            TaskBottomForm(date: $selectedDate, note: $note)
         }
         .padding()
         
-        Button(action: {}){
+        Button(action: {
+            let todo = Todo(context: moc)
+            todo.name = task
+            todo.date = selectedDate
+            todo.isCompleted = false
+            
+            try? moc.save()
+        }){
             Text("Create")
                 .font(.headline)
                 .foregroundColor(.white)
@@ -92,13 +74,19 @@ struct ModalView: View {
         
     }
     
-    
+    func formattedDate(someDate: Date) -> String {
+        let formatter = DateFormatter()
+        formatter.dateStyle = .medium
+        formatter.timeStyle = .medium
+        formatter.timeZone = TimeZone.current // Set to local time zone
+        return formatter.string(from: someDate)
+    }
     
     func handleOnTaskInforCellTap(taskInfo: String) {
-        print(taskInfo)
+  
     }
 }
 
 #Preview {
-    ModalView()
+    AddTaskModalView()
 }

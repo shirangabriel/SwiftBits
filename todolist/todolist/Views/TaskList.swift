@@ -8,12 +8,12 @@
 import SwiftUI
 
 struct TaskList: View {
+    @FetchRequest(sortDescriptors: []) var todoItems: FetchedResults<Todo>
     var body: some View {
-//        let task: Task = .init(name: "Test Task", isCompleted: false, dateAndTime: Date())
         VStack {
-            List {
+            List(todoItems) { todo in
                 Section(header: Text("Late")){
-                    TaskRow()
+                    TaskRow(task: todo)
                 }
                 .listRowBackground(Color("cardBackground"))
             }

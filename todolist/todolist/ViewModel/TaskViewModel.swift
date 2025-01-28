@@ -8,9 +8,7 @@
 import CoreData
 
 class TaskViewModel: ObservableObject {
-    @Published var tasks: [Task] = []
-    
-    func fetchTasks(){
-        tasks = CoreDataManager.shared.fetchTasks()
+    func addTask(title: String, isCompleted: Bool, date: Date) {
+
     }
 }

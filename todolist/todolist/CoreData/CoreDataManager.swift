@@ -8,7 +8,7 @@
 import CoreData
 
 class CoreDataManager {
-    static let coreDataManager  = CoreDataManager()
+    static let shared  = CoreDataManager()
     
     lazy var persistentContainer: NSPersistentContainer = {
         let container = NSPersistentContainer(name: "todolist")

@@ -9,9 +9,11 @@ import SwiftUI
 
 @main
 struct todolistApp: App {
+    @StateObject private var dataController = DataController()
     var body: some Scene {
         WindowGroup {
             Home()
+                .environment(\.managedObjectContext, dataController.container.viewContext)
         }
     }
 }
