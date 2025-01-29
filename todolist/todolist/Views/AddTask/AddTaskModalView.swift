@@ -68,17 +68,15 @@ struct AddTaskModalView: View {
             
             presentationMode.wrappedValue.dismiss()
             
-            
-            
         }){
             Text("Create")
                 .font(.headline)
                 .foregroundColor(.white)
                 .padding()
                 .frame(maxWidth: .infinity)
-                .background(.blue)
+                .background(task.isEmpty ? .gray: .blue)
         }
-        
+        .disabled(task.isEmpty)
     }
 }
 
