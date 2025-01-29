@@ -9,6 +9,7 @@ import SwiftUI
 
 struct DetailView: View {
     @Environment(\.managedObjectContext) var moc
+    @State var isPresented: Bool = false
     
     let listItem: ListItem
     var body: some View {
@@ -49,24 +50,16 @@ struct DetailView: View {
                 HStack {
                     Spacer()
                     FloatingButton(onTap: {
-                        let todo = Todo(context: moc)
-                        
-                        let action = ["Organize", "Clean", "Prepare", "Update", "Write", "Fix", "Review"]
-                        let objects = ["documents", "desk", "meeting agenda", "project report", "budget"];
-
-                        todo.isCompleted = false
-                        todo.name = "\(action.randomElement()!) \(objects.randomElement()!)"
-                        todo.date = Date()
-                        
-                        try? moc.save()
+                        isPresented = true
                     })
                     
                 }
             }
             
         }
-        
-        
+        .sheet(isPresented: $isPresented, content: {
+            AddTaskModalView()
+        })
     }
 }
 

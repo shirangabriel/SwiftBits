@@ -8,12 +8,15 @@
 import SwiftUI
 
 struct TaskList: View {
+    @Environment(\.managedObjectContext) var moc
     @FetchRequest(sortDescriptors: []) var todoItems: FetchedResults<Todo>
     var body: some View {
         VStack {
             List(todoItems) { todo in
                 Section(header: Text("Late")){
-                    TaskRow(task: todo)
+                    TaskRow(task: todo, onToggle: {
+                      
+                    })
                 }
                 .listRowBackground(Color("cardBackground"))
             }

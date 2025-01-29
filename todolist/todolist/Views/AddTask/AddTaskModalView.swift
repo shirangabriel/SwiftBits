@@ -58,11 +58,18 @@ struct AddTaskModalView: View {
         
         Button(action: {
             let todo = Todo(context: moc)
+            todo.id = UUID()
             todo.name = task
             todo.date = selectedDate
             todo.isCompleted = false
+            todo.note = note
             
             try? moc.save()
+            
+            presentationMode.wrappedValue.dismiss()
+            
+            
+            
         }){
             Text("Create")
                 .font(.headline)
@@ -72,18 +79,6 @@ struct AddTaskModalView: View {
                 .background(.blue)
         }
         
-    }
-    
-    func formattedDate(someDate: Date) -> String {
-        let formatter = DateFormatter()
-        formatter.dateStyle = .medium
-        formatter.timeStyle = .medium
-        formatter.timeZone = TimeZone.current // Set to local time zone
-        return formatter.string(from: someDate)
-    }
-    
-    func handleOnTaskInforCellTap(taskInfo: String) {
-  
     }
 }
 
