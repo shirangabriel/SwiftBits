@@ -57,6 +57,9 @@ struct AddTaskModalView: View {
         .padding()
         
         Button(action: {
+//            let newCategory = Category(context: moc)
+            
+            
             let todo = Todo(context: moc)
             todo.id = UUID()
             todo.name = task

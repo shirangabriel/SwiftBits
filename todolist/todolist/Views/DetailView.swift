@@ -8,7 +8,6 @@
 import SwiftUI
 
 struct DetailView: View {
-    @Environment(\.managedObjectContext) var moc
     @State var isPresented: Bool = false
     
     let listItem: ListItem

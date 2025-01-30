@@ -8,7 +8,6 @@
 import SwiftUI
 
 struct TaskList: View {
-    @Environment(\.managedObjectContext) var moc
     @FetchRequest(sortDescriptors: []) var todoItems: FetchedResults<Todo>
     var body: some View {
         VStack {
